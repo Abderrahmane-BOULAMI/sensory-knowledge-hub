@@ -15,9 +15,9 @@ Product teams keep sensory and consumer knowledge in many places: panel profiles
 ## What it does
 
 - **Connects the data.** One star schema (products, attributes, sensory scores, liking, recipes), stored in SQLite and exported as CSV files for Power BI. Every data problem found on the way is fixed in code and reported.
-- **Answers questions in plain English.** The search assistant maps a question to attributes, directions and filters with a sensory lexicon, ranks the matching products and retrieves the relevant findings. It shows what it understood, and says so when the data does not measure what was asked. It runs locally, with no external service.
-- **Explains liking.** Sensory maps, consumer segments, preference maps and drivers of liking, with the statistics a sensory scientist would expect: panel performance, permutation tests, confidence intervals.
-- **Supports product renovation.** A mixture model predicts the sensory profile and liking of a new cocktail recipe, per consumer segment, with an honest error estimate.
+- **Answers questions in plain English (AI-assisted search).** A natural-language search assistant maps a question to attributes, directions and filters with a sensory lexicon, ranks the matching products and retrieves the relevant findings. It shows what it understood, and says so when the data does not measure what was asked. It runs locally, with no external service.
+- **Explains liking with machine learning and statistics.** Sensory maps (PCA), consumer segments (clustering), preference maps and drivers of liking, with the statistics a sensory scientist would expect: panel performance, permutation tests, confidence intervals.
+- **Supports product renovation.** A predictive mixture model estimates the sensory profile and liking of a new cocktail recipe, per consumer segment, with an honest error estimate.
 - **Is reproducible.** One command rebuilds every result, 19 automated tests run on every change, and a dashboard smoke test checks every page.
 
 ## Key findings
@@ -69,7 +69,9 @@ How to read it: the assistant ranks with the same scores that define relevance, 
 
 The two failures are kept: "the crunchiest chocolate" (superlatives are not in the lexicon) and "which chocolate do consumers like most" ("like most" is not recognised as a ranking request).
 
-The lexicon approach is deliberately simple and transparent. Its limit is the lexicon itself: a word it does not know is ignored, which the answer makes visible ("Understood: ...").
+**Why no generative model.** The assistant is AI in the sense of natural-language understanding and information retrieval: rule-based language parsing with a sensory lexicon, then TF-IDF retrieval. It uses no generative model on purpose, so that every answer can be traced to a table row and nothing is invented. A large language model could sit on top of it later, to phrase answers or handle wider vocabulary, with this layer kept as its source of facts.
+
+The limit of the lexicon approach is the lexicon itself: a word it does not know is ignored, which the answer makes visible ("Understood: ...").
 
 ## Connected data model
 
